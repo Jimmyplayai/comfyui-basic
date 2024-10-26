@@ -1,0 +1,608 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 18,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": {
+        "0": 1596,
+        "1": 173
+      },
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1070270141844602,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": 26,
+        "1": 474
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SD1.5\\dreamshaper_8.safetensors"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 1278,
+        "1": 467
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        4
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 414,
+        "1": 184
+      },
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A girl"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 413,
+        "1": 389
+      },
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1948,
+        "1": 194
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 10,
+      "type": "Hina.PoseEditor3D",
+      "pos": {
+        "0": 362,
+        "1": 769
+      },
+      "size": [
+        600,
+        620
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OpenPose",
+          "type": "IMAGE",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "Depth",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "Normal",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "Canny",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Hina.PoseEditor3D"
+      },
+      "widgets_values": [
+        "OpenPoseEditor_0_pose.png",
+        "OpenPoseEditor_0_depth.png",
+        "OpenPoseEditor_0_normal.png",
+        "OpenPoseEditor_0_canny.png",
+        null
+      ]
+    },
+    {
+      "id": 11,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": 1080,
+        "1": 804
+      },
+      "size": {
+        "0": 319.78997802734375,
+        "1": 64.75244903564453
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "SD15\\control_v11p_sd15_openpose_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "ControlNetApplyAdvanced",
+      "pos": {
+        "0": 1107,
+        "1": 209
+      },
+      "size": {
+        "0": 340,
+        "1": 190
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 12,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 13,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 10,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 18,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 13,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 2172,
+        "1": 333
+      },
+      "size": {
+        "0": 275.23602294921875,
+        "1": 371.1144714355469
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 15,
+      "type": "Nui.OpenPoseEditor",
+      "pos": {
+        "0": 1441,
+        "1": 837
+      },
+      "size": {
+        "0": 210,
+        "1": 318
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Nui.OpenPoseEditor",
+        "savedPose": "{\n    \"width\": 512,\n    \"height\": 512,\n    \"keypoints\": [\n        [\n            [\n                230,\n                66\n            ],\n            [\n                230,\n                109\n            ],\n            [\n                180,\n                107\n            ],\n            [\n                166,\n                172\n            ],\n            [\n                152,\n                241\n            ],\n            [\n                287,\n                107\n            ],\n            [\n                306,\n                171\n            ],\n            [\n                370.45148300070133,\n                98.0084217480713\n            ],\n            [\n                214,\n                230\n            ],\n            [\n                202,\n                348\n            ],\n            [\n                204,\n                443\n            ],\n            [\n                259,\n                229\n            ],\n            [\n                271,\n                349\n            ],\n            [\n                354.12237280112214,\n                351.86637368201247\n            ],\n            [\n                221,\n                48\n            ],\n            [\n                242,\n                49\n            ],\n            [\n                214,\n                59\n            ],\n            [\n                249,\n                61\n            ]\n        ]\n    ]\n}"
+      },
+      "widgets_values": [
+        "ComfyUI_OpenPose_15.png",
+        "{\n    \"width\": 512,\n    \"height\": 512,\n    \"keypoints\": [\n        [\n            [\n                230,\n                66\n            ],\n            [\n                230,\n                109\n            ],\n            [\n                180,\n                107\n            ],\n            [\n                166,\n                172\n            ],\n            [\n                152,\n                241\n            ],\n            [\n                287,\n                107\n            ],\n            [\n                306,\n                171\n            ],\n            [\n                370.45148300070133,\n                98.0084217480713\n            ],\n            [\n                214,\n                230\n            ],\n            [\n                202,\n                348\n            ],\n            [\n                204,\n                443\n            ],\n            [\n                259,\n                229\n            ],\n            [\n                271,\n                349\n            ],\n            [\n                354.12237280112214,\n                351.86637368201247\n            ],\n            [\n                221,\n                48\n            ],\n            [\n                242,\n                49\n            ],\n            [\n                214,\n                59\n            ],\n            [\n                249,\n                61\n            ]\n        ]\n    ]\n}",
+        "image"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      4,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      8,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      11,
+      0,
+      12,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      12,
+      6,
+      0,
+      12,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      7,
+      0,
+      12,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      12,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      12,
+      1,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      8,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      10,
+      0,
+      12,
+      3,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9646149645000013,
+      "offset": [
+        -285.2646389298426,
+        -145.22606275045237
+      ]
+    }
+  },
+  "version": 0.4
+}
