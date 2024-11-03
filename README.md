@@ -12,6 +12,7 @@ comfyui-openpose.json
 comfyui-facedetailer.json
 【Comfyui】Facedetailer basic tutorial
 [Bili](https://www.bilibili.com/video/BV1uk1jYEEbN/)
+[Youtube](https://www.youtube.com/watch?v=PVk32u8LhsU)
 
 comfyui-changeface.json
 【Comfyui】Instantid，change face
