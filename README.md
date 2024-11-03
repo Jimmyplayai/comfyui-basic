@@ -3,6 +3,7 @@
 comfyui-controlnet.json
 【Comfyui-Controlnet basic tutorial】Depth，Canny，Openpose practice
 [Bili](https://www.bilibili.com/video/BV1A1ySYaEdr/)
+[Youtube](https://www.youtube.com/watch?v=WNJcebJm6F8&t=35s)
 
 comfyui-openpose.json
 【Comfyui】Openpose advance
